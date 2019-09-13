@@ -1,0 +1,109 @@
+Twitter is often viewed as a public platform, largely because of Twitter user data provided through APIs. 
+However, the data Twitter provides is limited because of a combination of data volume, user privacy expectations, and Twitter’s business interests.
+Consequently, in our analysis we collected data from worldwide based on specific topic or about a specific person which gives the required information 
+to use the data to analyse the current trends and sentiment analysis of that particular subject.
+
+OBJECTIVES :
+•	To extract the tweets from using Twitter API
+•	To get the recent tweets of a particular person or a topic and cleaning it for analysis
+•	To do sentiment analysis by getting individual scores for tweets based on positive and negative words.
+•	To know the top tweeters of the selected topic.
+•	To visually represent the score using R-shiny.
+
+LIMITATIONS OF STUDY
+•	This study is only limited to twitter data.
+•	Only the recent tweets are taken based on the sample size.
+•	However, the data Twitter provides is limited because of a combination of data volume, user privacy expectations, and Twitter’s business interests.
+•	Analyzing in R Studio version 3.6.1
+
+(I): Authentication of Tweets:
+
+In this we will create a twitter account and create and application’s dashboard and get the consumers_key, consumer_secret, access_token, access_secret.
+1-	trump.tweets = searchTwitter("trump", n=150)
+
+(ii).	Cleaning of Tweets:
+
+In this part, we will clean the tweets, which we have retrieved in the previous authentication part.
+2-	df$text <- sapply(df$text,function(row) iconv(row, "latin1", "ASCII", sub="")
+
+So this command will remove the emoticons in the tweets.
+3-	df$text = gsub("(f|ht)tp(s?)://(.*)[.][a-z]+",  df$text)
+
+This command will remove the URL in the tweets, because we want to see the
+Word whether it is negative or positive and score for both.
+and run command :
+ df - it will display all the tweets in data frame.
+
+(iii).	Words Database
+
+This word database will be dealing with the positive and negative words data in which we will set up a path, which the positive and negative word database will be created and from this we can acess the positive word and the negative word for the tweets and tell whether it is an positive word or negative word.
+4-	pos.words = scan('C:/Users/OPTIMUS PRIME/Documents/twitter project/positive-words.txt', what='character', comment.char=';')give your location in system
+5-	neg.words = scan('C:/Users/OPTIMUS PRIME/Documents/twitter project/negative-words.txt', what='character', comment.char=';')give your location in system
+
+(iv).	Update score on sentiment
+
+In this score on sentiment we will see the score for each tweet and we will give the score for the positive and negative tweets in the numerical format.
+6-	[scores.df = data.frame (score = score_new, text=sentences)
+and run (scores.df) 
+
+(v).	Function on tweets:
+
+Therefore, from the previous part we have an idea about how the positive and negative word will be retrieved from the tweets, which we have taken and give the related score for that tweets word.
+In addition, we will create three tables in which we can lists the positive score in one table, negative score in one table and total percentage of the scores in another table. Therefore, they will be like. 
+
+and run command (table_final)
+
+(vi).	Top 10 hashtagers
+
+In ths we will show the top hashtagers in the tweets which we have taken.
+and run command (have.hash). 
+ 
+(vii).	Percentages
+  	 posSc=table_final$Positive
+here we will give the positive value for the word and in a percentage format
+ 	negSc=table_final$Negative
+same as the percentage format.
+	table_final$PosPercent = posSc/ (posSc+negSc)
+	pp = table_final$PosPercent
+	pp[is.nan(pp)] <- 0
+	table_final$PosPercent = pp
+the mathematical format for positive percentage score
+	table_final$NegPercent = negSc/ (posSc+negSc)
+	nn = table_final$NegPercent
+	nn[is.nan(nn)] <- 0
+	table_final$NegPercent = nn
+the mathematical format for negative percentage score.
+
+(viii).	Graphs
+	hist(table_final$Positive, col=rainbow(10))
+
+(ix).	Front end
+Front-end web development is the practice of converting data to a graphical interface, with HTML, CSS, and JavaScript, so that users can view and interact with that data.
+and press run app in the top right corner of the server function and the new tab opens with all the shiny applications. and now search the terms in the search bar and analyse and see th charts and graphs and top tweeters. 
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
